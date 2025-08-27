@@ -3,84 +3,79 @@
 
 class InputReader {
 private:
-    int n;
-    int m;
-    int Q;
-
-    int* d; // Ponteiro para o array d
-    int** c; // Ponteiro para ponteiros para a matriz c
+    int stations;
+    int vehicles;
+    int vehicleCapacity;
+    int* stationsRequests; 
+    int** costMatrix; 
 
 public:
-    InputReader(std::istream& fileInput) : n(0), m(0), Q(0), d(nullptr), c(nullptr) {
+    InputReader(std::istream& fileInput) : stations(0), vehicles(0), vehicleCapacity(0), stationsRequests(nullptr), costMatrix(nullptr) {
 
-        fileInput >> this->n >> this->m >> this->Q;
+        fileInput >> this->stations >> this->vehicles >> this->vehicleCapacity;
         
-    
-        if (this->n <= 0) {
+        if (this->stations <= 0) {
             return;
         }
 
-        
-        this->d = new int[this->n];
-        for (int i = 0; i < this->n; ++i) {
-            fileInput >> this->d[i];
+        this->stationsRequests = new int[this->stations];
+        for (int i = 0; i < this->stations; ++i) {
+            fileInput >> this->stationsRequests[i];
         }
-
         
-        int matrix_size = this->n + 1;
-        this->c = new int*[matrix_size];
-        
-        
-        for (int i = 0; i < matrix_size; ++i) {
-            this->c[i] = new int[matrix_size];
-            for (int j = 0; j < matrix_size; ++j) {
-                fileInput >> this->c[i][j];
+        int matrizSize = this->stations + 1;
+        this->costMatrix = new int*[matrizSize];
+                
+        for (int i = 0; i < matrizSize; ++i) {
+            this->costMatrix[i] = new int[matrizSize];
+            for (int j = 0; j < matrizSize; ++j) {
+                fileInput >> this->costMatrix[i][j];
             }
         }
     }
 
     ~InputReader() {
         
-        delete[] d;
+        delete[] stationsRequests;
 
         
-        if (c != nullptr) {
-            int matrix_size = this->n + 1;
+        if (costMatrix != nullptr) {
+            int matrizSize = this->stations + 1;
             
-            for (int i = 0; i < matrix_size; ++i) {
-                delete[] c[i];
+            for (int i = 0; i < matrizSize; ++i) {
+                delete[] costMatrix[i];
             }
             
-            delete[] c;
+            delete[] costMatrix;
         }
     }
 
     
-    int getN() const { return n; }
-    int getM() const { return m; }
-    int getQ() const { return Q; }
-    int* getD() const { return d; }
-    int** getC() const { return c; }
+    int getStations() const { return stations; }
+    int getVehicles() const { return vehicles; }
+    int getVehicleCapacity() const { return vehicleCapacity; }
+    int* getRequests() const { return requests; }
+    int** getCostMatrix() const { return costMatrix; }
 
     void printData() const {
-        std::cout << "n: " << n << std::endl;
-        std::cout << "m: " << m << std::endl;
-        std::cout << "Q: " << Q << std::endl;
+        std::cout << "stations: " << stations << std::endl;
+        std::cout << "vehicles: " << vehicles << std::endl;
+        std::cout << "vehicleCapacity: " << vehicleCapacity << std::endl;
 
-        if (d != nullptr) {
-            std::cout << "\nArray d:" << std::endl;
-            for (int i = 0; i < n; ++i) {
-                std::cout << d[i] << " ";
+        if (requests != nullptr) {
+            std::cout << "\nRequests array:" << std::endl;
+            for (int i = 0; i < stations; ++i) {
+                std::cout << requests[i] << " ";
             }
             std::cout << std::endl;
         }
 
-        if (c != nullptr) {
-            std::cout << "\nMatriz c:" << std::endl;
-            int matrix_size = n + 1;
-            for (int i = 0; i < matrix_size; ++i) {
-                for (int j = 0; j < matrix_size; ++j) {
-                    std::cout << c[i][j] << "\t";
+        if (costMatrix != nullptr) {
+            std::cout << "\nCost Matrix:" << std::endl;
+            int matrizSize = stations + 1;
+            for (int i = 0; i < matrizSize; ++i) {
+                for (int j = 0; j < matrizSize; ++j) {
+                    std::cout << costMatrix[i][j] << "\t";
                 }
                 std::cout << std::endl;
             }
