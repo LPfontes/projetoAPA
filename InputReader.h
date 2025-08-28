@@ -14,17 +14,17 @@ public:
     InputReader(std::istream& fileInput) : stations(0), vehicles(0), vehicleCapacity(0), stationsRequests(nullptr), costMatrix(nullptr) {
 
         fileInput >> this->stations >> this->vehicles >> this->vehicleCapacity;
-
+        this->stations++;
         if (this->stations <= 0) {
             return;
         }
 
-        this->stationsRequests = new int[this->stations];
-        for (int i = 0; i < this->stations; ++i) {
+        this->stationsRequests = new int[this->stations-1];
+        for (int i = 0; i < this->stations-1; ++i) {
             fileInput >> this->stationsRequests[i];
         }
 
-        int matrizSize = this->stations + 1;
+        int matrizSize = this->stations;
         this->costMatrix = new node*[matrizSize];
 
         for (int i = 0; i < matrizSize; ++i) {
@@ -60,7 +60,7 @@ public:
     int* getRequests() const { return stationsRequests; }
     node** getCostMatrix() const { return costMatrix; }
     void orderCostMatrix() const {
-    int matrizSize = stations + 1;
+    int matrizSize = stations;
     for (int i = 0; i < matrizSize; ++i) {
         std::sort(costMatrix[i], costMatrix[i] + matrizSize, [](const node& a, const node& b) {
             return a.cost < b.cost;
@@ -74,7 +74,7 @@ public:
 
         if (stationsRequests != nullptr) {
             std::cout << "\nRequests array:" << std::endl;
-            for (int i = 0; i < stations; ++i) {
+            for (int i = 0; i < stations-1; ++i) {
                 std::cout << stationsRequests[i] << " ";
             }
             std::cout << std::endl;
@@ -82,7 +82,7 @@ public:
 
         if (costMatrix != nullptr) {
             std::cout << "\nCost Matrix:" << std::endl;
-            int matrizSize = stations + 1;
+            int matrizSize = stations;
             for (int i = 0; i < matrizSize; ++i) {
                 for (int j = 0; j < matrizSize; ++j) {
                     std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation <<", "<< costMatrix[i][j].request<<")\t";
@@ -93,7 +93,7 @@ public:
         orderCostMatrix();
         if (costMatrix != nullptr) {
             std::cout << "\nCost Matrix:" << std::endl;
-            int matrizSize = stations + 1;
+            int matrizSize = stations;
             for (int i = 0; i < matrizSize; ++i) {
                 for (int j = 0; j < matrizSize; ++j) {
                     std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation <<", "<< costMatrix[i][j].request<< ")\t";
