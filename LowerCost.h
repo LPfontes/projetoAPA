@@ -48,10 +48,15 @@ private:
                 }
             }
             if (!found) {
+                VehicleRoutes[currentRoute][stepIndex++] = RouteStep(0, VehicleLoad, costMatrix[currentStation][0].cost);
+
                 break;
             }
         }
 
+        if (quantStationsNotVisited == 0) {
+                VehicleRoutes[currentRoute][stepIndex++] = RouteStep(0, VehicleLoad, costMatrix[currentStation][0].cost);
+            }
         // Imprime a rota criada
         std::cout << "Rota criada: ";
         for (int i = 0; i < stepIndex; ++i) {
@@ -77,7 +82,7 @@ public:
         stationsNotVisited[0] = 0;
         for (int i = 1; i < stations; ++i) {
             stationsNotVisited[i] = 1;
-            std::cout << stationsNotVisited[i]  << std::endl;
+            
         }
     }
 

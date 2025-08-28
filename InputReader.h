@@ -62,9 +62,9 @@ public:
     void orderCostMatrix() const {
     int matrizSize = stations;
     for (int i = 0; i < matrizSize; ++i) {
-        std::sort(costMatrix[i], costMatrix[i] + matrizSize, [](const node& a, const node& b) {
-            return a.cost < b.cost;
-        });
+    std::sort(costMatrix[i] + 1, costMatrix[i] + matrizSize, [](const node& a, const node& b) {
+        return a.cost < b.cost;
+    });
     }
     }
     void printData() const {
