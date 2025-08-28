@@ -1,7 +1,7 @@
 #include <istream>
 #include <iostream>
 #include <fstream>
-#include "InputReader.h"
+#include "LowerCost.h"
 int main() {
 
     // Abrindo o arquivo de entrada
@@ -18,7 +18,9 @@ int main() {
     // Usa os dados através dos getters
     std::cout << "Dados lidos do arquivo usando a classe com ponteiros:" << std::endl;
     dados.printData();
-    
+    LowerCost alg(dados.getVehicles(),dados.getStations(),dados.getVehicleCapacity());
+    dados.getCostMatrix();
+    alg.Solution(dados.getCostMatrix());
 
     return 0;
 }

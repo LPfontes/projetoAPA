@@ -23,3 +23,8 @@ run: $(TARGET)
 .PHONY: clean
 clean:
 	$(RM) $(TARGET)
+
+.PHONY: debug
+debug:
+	mkdir -p build/Debug
+	$(CXX) $(CXXFLAGS) main.cpp -o build/Debug/outDebug

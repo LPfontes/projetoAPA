@@ -32,7 +32,7 @@ public:
             for (int j = 0; j < matrizSize; ++j) {
                 int costValue;
                 fileInput >> costValue;
-                this->costMatrix[i][j] = node(costValue, j); // destinyStation = j
+                this->costMatrix[i][j] = node(costValue, j,(j == 0) ? 0 : stationsRequests[j - 1]); 
             }
         }
     }
@@ -85,7 +85,7 @@ public:
             int matrizSize = stations + 1;
             for (int i = 0; i < matrizSize; ++i) {
                 for (int j = 0; j < matrizSize; ++j) {
-                    std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation << ")\t";
+                    std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation <<", "<< costMatrix[i][j].request<<")\t";
                 }
                 std::cout << std::endl;
             }
@@ -96,7 +96,7 @@ public:
             int matrizSize = stations + 1;
             for (int i = 0; i < matrizSize; ++i) {
                 for (int j = 0; j < matrizSize; ++j) {
-                    std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation << ")\t";
+                    std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation <<", "<< costMatrix[i][j].request<< ")\t";
                 }
                 std::cout << std::endl;
             }
