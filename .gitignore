@@ -10,4 +10,5 @@ prog
 # Ignorar arquivos de objeto e bibliotecas (se houver)
 *.o
 *.a
+.exe
 build/Debug/outDebug
