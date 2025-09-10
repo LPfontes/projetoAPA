@@ -1,20 +1,31 @@
-
 CXX = g++
-
 CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
-RM = rm -f
+# Define os diretórios
+BUILD_DIR = ./build
+SRC_DIR = ./src
+INCLUDE_DIR = ./include
 
-TARGET = prog
+# Lista todos os arquivos de origem .cpp no diretório src
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+SRCS += $(wildcard $(SRC_DIR)/*/*.cpp)
 
-SRCS = main.cpp
+# Cria a lista de arquivos objeto (.o) com base nos .cpp
+OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
+
+# Define o nome do executável final
+TARGET = $(BUILD_DIR)/prog
 
 .PHONY: all
 all: $(TARGET)
 
-$(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
+# Regra de compilação para cada arquivo .cpp -> .o
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(@D) # Cria o diretório de build se não existir
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INCLUDE_DIR)
 
 .PHONY: run
 run: $(TARGET)
@@ -22,9 +33,8 @@ run: $(TARGET)
 
 .PHONY: clean
 clean:
-	$(RM) $(TARGET)
+	$(RM) $(BUILD_DIR)/* $(TARGET)
 
 .PHONY: debug
 debug:
-	mkdir -p build/Debug
-	$(CXX) $(CXXFLAGS) main.cpp -o build/Debug/outDebug
+	$(CXX) $(CXXFLAGS) -o $(BUILD_DIR)/debug_prog $(SRCS) -I$(INCLUDE_DIR)
