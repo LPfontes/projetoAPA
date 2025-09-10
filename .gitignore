@@ -1,5 +1,5 @@
 # Ignorar arquivos de build
-prog
+build/prog
 
 # Ignorar o diretório de configurações do VS Code
 .vscode/
