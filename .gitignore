@@ -4,8 +4,6 @@ build/prog
 # Ignorar o diretório de configurações do VS Code
 .vscode/
 
-# Ignorar arquivos de texto
-*.txt
 
 # Ignorar arquivos de objeto e bibliotecas (se houver)
 *.o
