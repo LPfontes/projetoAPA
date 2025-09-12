@@ -1,12 +1,12 @@
-#ifndef _INPUTREADER_H_
-#define _INPUTREADER_H_
+#ifndef _INSTANCE_H_
+#define _INSTANCE_H_
 
 #include <iostream>
 #include <istream>
 #include <algorithm> 
 #include "Node.h"
 
-class InputReader {
+class Instance {
 private:
     int stations;
     int vehicles;
@@ -15,9 +15,9 @@ private:
     node** costMatrix; 
 public:
     
-    InputReader(std::istream& fileInput);
+    Instance(std::istream& fileInput);
     
-    ~InputReader();
+    ~Instance();
 
     int getStations() const;
     int getVehicles() const;
@@ -25,8 +25,8 @@ public:
     int* getRequests() const;
     node** getCostMatrix() const;
     
-    void orderCostMatrix() const;
+    //void orderCostMatrix() const;
     void printData() const;
 };
 
-#endif // _INPUTREADER_H_
+#endif // _INSTANCE_H_

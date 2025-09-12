@@ -1,30 +1,29 @@
 #ifndef LOWERCOST_H
 #define LOWERCOST_H
 
-#include "InputReader.h"
+#include "Instance.h"
 #include "RouteStep.h"  
+#include "Node.h"
+#include <vector>
 #include <iostream>
 
 class LowerCost {
 private:
-    int solutionValue;
-    int numberOfVehicles;
-    RouteStep** VehicleRoutes;
-    int currentRoute;
-    int* stationsNotVisited;
-    int quantStationsNotVisited;
-    int limitCapacityVehicle;
+    
+    std::vector<std::vector<RouteStep>> VehicleRoutes;
     int stations;
-
-    void makeRoutes(node** costMatrix, int routeIndex);
+    int numberOfVehicles;
+    int quantStationsNotVisited;
+    std::vector<int> stationsNotVisited;
+    int limitCapacityVehicle;
+    int currentRoute;
+    void makeRoutes(node** costMatrix);
 
 public:
-    
+
     LowerCost(int numberOfVehicles, int stations, int limitCapacityVehicle);
+    std::vector<std::vector<RouteStep>>* Solution(node** costMatrix);
 
-    void Solution(node** costMatrix);
-
-    ~LowerCost();
 };
 
 #endif // LOWERCOST_H
