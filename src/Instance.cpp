@@ -1,6 +1,6 @@
-#include "InputReader.h"
+#include "Instance.h"
 
-InputReader::InputReader(std::istream& fileInput) 
+Instance::Instance(std::istream& fileInput) 
     : stations(0), vehicles(0), vehicleCapacity(0), stationsRequests(nullptr), costMatrix(nullptr) {
 
     fileInput >> this->stations >> this->vehicles >> this->vehicleCapacity;
@@ -27,7 +27,7 @@ InputReader::InputReader(std::istream& fileInput)
     }
 }
 
-InputReader::~InputReader() {
+Instance::~Instance() {
     delete[] stationsRequests;
     if (costMatrix != nullptr) {
         // Correção na matrizSize, deve ser 'stations', não 'stations + 1'
@@ -39,28 +39,23 @@ InputReader::~InputReader() {
     }
 }
 
-int InputReader::getStations() const { return stations; }
-int InputReader::getVehicles() const { return vehicles; }
-int InputReader::getVehicleCapacity() const { return vehicleCapacity; }
-int* InputReader::getRequests() const { return stationsRequests; }
-node** InputReader::getCostMatrix() const { return costMatrix; }
+int Instance::getStations() const { return stations; }
+int Instance::getVehicles() const { return vehicles; }
+int Instance::getVehicleCapacity() const { return vehicleCapacity; }
+int* Instance::getRequests() const { return stationsRequests; }
+node** Instance::getCostMatrix() const { return costMatrix; }
 
-void InputReader::orderCostMatrix() const {
-    int matrizSize = stations;
-    for (int i = 0; i < matrizSize; ++i) {
-        std::sort(costMatrix[i] + 1, costMatrix[i] + matrizSize, [](const node& a, const node& b) {
-            return a.cost < b.cost;
-        });
-    }
-}
 
-void InputReader::printData() const {
+void Instance::printData() const {
+
+    std::cout << "\nDados da instancia:\n" << std::endl;
+
     std::cout << "stations: " << stations << std::endl;
     std::cout << "vehicles: " << vehicles << std::endl;
     std::cout << "vehicleCapacity: " << vehicleCapacity << std::endl;
 
     if (stationsRequests != nullptr) {
-        std::cout << "\nRequests array:" << std::endl;
+        std::cout << "\nRequests array:\n" << std::endl;
         for (int i = 0; i < stations - 1; ++i) {
             std::cout << stationsRequests[i] << " ";
         }
@@ -68,7 +63,7 @@ void InputReader::printData() const {
     }
 
     if (costMatrix != nullptr) {
-        std::cout << "\nCost Matrix (Original):" << std::endl;
+        std::cout << "\nCost Matrix:\n" << std::endl;
         int matrizSize = stations;
         for (int i = 0; i < matrizSize; ++i) {
             for (int j = 0; j < matrizSize; ++j) {
@@ -77,17 +72,5 @@ void InputReader::printData() const {
             std::cout << std::endl;
         }
     }
-    
-    orderCostMatrix();
-    
-    if (costMatrix != nullptr) {
-        std::cout << "\nCost Matrix (Ordered):" << std::endl;
-        int matrizSize = stations;
-        for (int i = 0; i < matrizSize; ++i) {
-            for (int j = 0; j < matrizSize; ++j) {
-                std::cout << "(" << costMatrix[i][j].cost << "," << costMatrix[i][j].destinyStation << ", " << costMatrix[i][j].request << ")\t";
-            }
-            std::cout << std::endl;
-        }
-    }
+
 }
