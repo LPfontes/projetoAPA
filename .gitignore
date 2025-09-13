@@ -10,3 +10,6 @@ build/prog
 *.a
 .exe
 build/Debug/outDebug
+src/build/Debug/outDebug
+.gitignore
+src/build/Release/outRelease

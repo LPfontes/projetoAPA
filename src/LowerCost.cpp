@@ -1,4 +1,4 @@
-#include "LowerCost.h"
+#include "../include/LowerCost.h"
 
 // Construtor
 LowerCost::LowerCost(int numberOfVehicles, int stations, int limitCapacityVehicle) {
@@ -24,12 +24,12 @@ LowerCost::LowerCost(int numberOfVehicles, int stations, int limitCapacityVehicl
 // Algoritimo guloso para obter a rota inicial
 void LowerCost::makeRoutes(node** costMatrix) {
 
-
+    int totalRouteCost = 0;
     int currentStation = 0;
     int VehicleLoad = 0;
 
     std::vector<RouteStep> currentRouteSteps;
-    currentRouteSteps.push_back(RouteStep{currentStation, VehicleLoad});
+    currentRouteSteps.push_back(RouteStep{currentStation,currentStation, VehicleLoad});
 
     while (quantStationsNotVisited > 0) {
         bool found = false;
@@ -44,7 +44,8 @@ void LowerCost::makeRoutes(node** costMatrix) {
                     if (VehicleLoad < 0) VehicleLoad = -VehicleLoad;
                     
                     stationsNotVisited[dest] = 0;
-                    currentRouteSteps.push_back(RouteStep{costMatrix[currentStation][i].destinyStation, VehicleLoad, costMatrix[currentStation][i].cost});
+                    totalRouteCost += costMatrix[currentStation][i].cost;
+                    currentRouteSteps.push_back(RouteStep{currentStation,costMatrix[currentStation][i].destinyStation, VehicleLoad, costMatrix[currentStation][i].cost,totalRouteCost});
                     quantStationsNotVisited--;
                     currentStation = dest;
                     found = true;
@@ -53,13 +54,15 @@ void LowerCost::makeRoutes(node** costMatrix) {
             }
         }
         if (!found) {
-            currentRouteSteps.push_back(RouteStep{0, VehicleLoad, costMatrix[currentStation][0].cost});
+            totalRouteCost += costMatrix[currentStation][0].cost;
+            currentRouteSteps.push_back(RouteStep{currentStation,0, VehicleLoad, costMatrix[currentStation][0].cost,totalRouteCost});
             break;
         }
     }
     
     if (quantStationsNotVisited == 0) {
-        currentRouteSteps.push_back(RouteStep{0, VehicleLoad, costMatrix[currentStation][0].cost});
+        totalRouteCost += costMatrix[currentStation][0].cost;
+        currentRouteSteps.push_back(RouteStep{currentStation,0, VehicleLoad, costMatrix[currentStation][0].cost,totalRouteCost});
     }
 
     VehicleRoutes[currentRoute] = currentRouteSteps;

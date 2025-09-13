@@ -17,10 +17,15 @@ public:
     void printSolution() const;
     //const std::vector<std::vector<int>>& getSolution() const;
 
+    int getTotalCost() const { return totalCost; }
+    void setTotalCost(int value) { totalCost = value; }
+    void addToTotalCost(int value) { totalCost += value; }
+
 private:
 
     Instance* instance;
     std::vector<std::vector<RouteStep>>* solution; 
+    int totalCost;
 };
 
 #endif // H_SOLUTION_H

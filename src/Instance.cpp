@@ -1,4 +1,4 @@
-#include "Instance.h"
+#include "../include/Instance.h"
 
 Instance::Instance(std::istream& fileInput) 
     : stations(0), vehicles(0), vehicleCapacity(0), stationsRequests(nullptr), costMatrix(nullptr) {

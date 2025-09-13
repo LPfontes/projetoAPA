@@ -1,8 +1,8 @@
 #include <istream>
 #include <iostream>
 #include <fstream>
-#include "Instance.h"
-#include "Solution.h"
+#include "../include/Instance.h"
+#include "../include/Solution.h"
 
 
 int main(int argc, char* argv[]) {

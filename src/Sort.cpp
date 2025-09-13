@@ -1,4 +1,4 @@
-#include "Sort.h"
+#include "../include/Sort.h"
 
 // ordenação sem copia.
 void Sorter::sortInPlace(node** costMatrix, int matrixSize) {
