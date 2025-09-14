@@ -3,6 +3,7 @@
 
 class RouteStep {
 public:
+
     int stationOriginId;
     int stationId;
     int cargo;

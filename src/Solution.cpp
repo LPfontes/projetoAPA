@@ -23,13 +23,33 @@ void Solution::bake()  {
         }
     }
 
-    // Calcula o totalCost da solução 
-    for (size_t i = 0; i < this->solution->size(); ++i) {
-        addToTotalCost((*this->solution)[i][(*this->solution)[i].size() - 1].accumulatedCost);
-    }
-    std::cout << "\nSolucao gulosa" << std::endl;
-    printSolution();
+    calculateCosts();
 
+    std::cout << "\nSolucao gulosa" << std::endl;
+    std::cout << "\nCuto total: " << getTotalCost() << std::endl;
+    //printSolution();
+
+    std::cout << "\nVND" << std::endl;
+    VND vnd;
+    vnd.vnd(*this->solution, costMatrix, getTotalCost(), this->instance->getVehicleCapacity());
+
+    calculateCosts();
+    std::cout << "\nCuto total: " << getTotalCost() << std::endl;
+
+    //printSolution();
+
+
+}
+
+void Solution::calculateCosts() {
+
+    setTotalCost(0);
+
+   // Calcula o totalCost da solução 
+    for (size_t i = 0; i < this->solution->size(); ++i) {
+        int route_cost = (*this->solution)[i][(*this->solution)[i].size() - 1].accumulatedCost;
+        addToTotalCost(route_cost);
+    }
 }
 
 void Solution::printSolution() const {

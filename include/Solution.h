@@ -7,6 +7,7 @@
 #include "Instance.h"
 #include "LowerCost.h"
 #include "Sort.h" 
+#include "VND.h"
 
 class Solution {
 public:
@@ -17,6 +18,7 @@ public:
     void printSolution() const;
     //const std::vector<std::vector<int>>& getSolution() const;
 
+    void calculateCosts();
     int getTotalCost() const { return totalCost; }
     void setTotalCost(int value) { totalCost = value; }
     void addToTotalCost(int value) { totalCost += value; }

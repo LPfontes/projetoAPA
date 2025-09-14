@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     arquivo.close();
 
     // exibe a instancia
-    instance.printData();
+    //instance.printData();
 
     //gera a solucao
     Solution solution(&instance);
