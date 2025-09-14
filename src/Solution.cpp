@@ -27,7 +27,7 @@ void Solution::bake()  {
 
     std::cout << "\nSolucao gulosa" << std::endl;
     std::cout << "\nCuto total: " << getTotalCost() << std::endl;
-    //printSolution();
+    printSolution();
 
     std::cout << "\nVND" << std::endl;
     VND vnd;

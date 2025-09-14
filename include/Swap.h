@@ -12,13 +12,13 @@
 class Swap {
 public:
 
-    Swap(node** m);
+    Swap(node** costMatrix);
     bool run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capacity);
 
 private:
 
-    node** m; 
-    bool swap_in_route(std::vector<RouteStep> &r, int route_cost, int vehicle_capacity);
+    node** costMatrix; 
+    bool swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity);
 
 };
 
