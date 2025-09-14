@@ -11,8 +11,8 @@
 class Utils
 {
 public:
-    bool isValid(std::vector<RouteStep> &r, node **&m, int vehicle_capacity);
-    void updateRoute(std::vector<RouteStep> &r, node **&m);
+    int isValid(std::vector<RouteStep> &routeSteps, node **&costMatrix, int vehicle_capacity);
+    void updateRoute(std::vector<RouteStep> &routeSteps, node **&costMatrix);
     int custo_total(std::vector<std::vector<RouteStep>> &solution);
 };
 

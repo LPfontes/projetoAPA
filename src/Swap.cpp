@@ -25,6 +25,7 @@ bool Swap::swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int 
     int bestCost = routeCost;
     int bestI;
     int bestJ;
+    int best_init;
     int routeSize = routeSteps.size();
     Utils utils;
 
@@ -92,12 +93,14 @@ bool Swap::swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int 
             {
                 std::vector<RouteStep> tempRoute = routeSteps;
 
-                if (utils.isValid(tempRoute, costMatrix, vehicleCapacity))
+                int isValid = utils.isValid(tempRoute, costMatrix, vehicleCapacity);
+                if (isValid != -1)
                 {
                     routeSteps = tempRoute;
                     bestCost = cost;
                     bestI = i;
                     bestJ = j;
+                    best_init = isValid;
                 }
             }
         }
@@ -106,7 +109,9 @@ bool Swap::swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int 
     if (bestCost < routeCost)
     {
         std::swap(routeSteps[bestI], routeSteps[bestJ]);
+        routeSteps[0].cargo = best_init;
         utils.updateRoute(routeSteps, costMatrix);
+       
         return true;
     }
 

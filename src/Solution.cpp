@@ -36,7 +36,7 @@ void Solution::bake()  {
     calculateCosts();
     std::cout << "\nCuto total: " << getTotalCost() << std::endl;
 
-    //printSolution();
+    printSolution();
 
 
 }
