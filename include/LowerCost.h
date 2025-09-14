@@ -17,13 +17,15 @@ private:
     std::vector<int> stationsNotVisited;
     int limitCapacityVehicle;
     int currentRoute;
+    int totalRouteCost = 0;
+    int totalCost = 0;
     void makeRoutes(node** costMatrix);
 
 public:
 
     LowerCost(int numberOfVehicles, int stations, int limitCapacityVehicle);
     std::vector<std::vector<RouteStep>>* Solution(node** costMatrix);
-
+    void swapVerticesInRoute(int routeIndex, int posA, int posB,node** costMatrix);
 };
 
 #endif // LOWERCOST_H

@@ -9,8 +9,21 @@ public:
     int cost;
     int accumulatedCost;
 
-    RouteStep() : stationId(0), cargo(0), cost(0) {}
-    RouteStep(int orgin,int id, int c, int costValue = 0,int accumulatedCostvalue = 0) :stationOriginId(orgin), stationId(id), cargo(c), cost(costValue),accumulatedCost(accumulatedCostvalue) {}
-};
+    RouteStep() : stationOriginId(0), stationId(0), cargo(0), cost(0), accumulatedCost(0) {}
+    RouteStep(int origin, int id, int c, int costValue = 0, int accumulatedCostValue = 0)
+        : stationOriginId(origin), stationId(id), cargo(c), cost(costValue), accumulatedCost(accumulatedCostValue) {}
 
+    int getCost() const { return cost; }
+    int getStationId() const { return stationId; }
+    int getStationOriginId() const { return stationOriginId; }
+    int getCargo() const { return cargo; }
+    int getAccumulatedCost() const { return accumulatedCost; }
+
+    // Setters
+    void setCost(int value) { cost = value; }
+    void setStationId(int value) { stationId = value; }
+    void setStationOriginId(int value) { stationOriginId = value; }
+    void setCargo(int value) { cargo = value; }
+    void setAccumulatedCost(int value) { accumulatedCost = value; }
+};
 #endif // ROUTESTEP_H

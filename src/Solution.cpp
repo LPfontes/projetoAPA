@@ -1,6 +1,6 @@
 #include "../include/Solution.h"
 
-Solution::Solution(Instance* instance): instance(instance) {}
+Solution::Solution(Instance* inst): instance(inst) {}
 
 void Solution::bake()  {
 
@@ -13,6 +13,7 @@ void Solution::bake()  {
 
     //passa um copia da matriz ordenada
     //copia pq vamos precisa dela normal para o VND
+
     this->solution = alg.Solution(sorter.sortByCopy(costMatrix, matrixSize));
     // Remove rotas vazias do vetor solution
     for (auto it = this->solution->begin(); it != this->solution->end(); ) {
@@ -29,7 +30,8 @@ void Solution::bake()  {
     }
     std::cout << "\nSolucao gulosa" << std::endl;
     printSolution();
-
+    alg.swapVerticesInRoute(0,1,3,costMatrix);
+    printSolution();
 }
 
 void Solution::printSolution() const {

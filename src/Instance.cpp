@@ -1,3 +1,4 @@
+
 #include "../include/Instance.h"
 
 Instance::Instance(std::istream& fileInput) 
