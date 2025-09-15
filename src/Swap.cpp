@@ -10,7 +10,7 @@ bool Swap::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capaci
 
         int route_cost = (solution)[i][(solution)[i].size() - 1].accumulatedCost;
 
-        if (swap_in_route(solution[i], route_cost, vehicle_capacity)){
+        if (swapInRoute(solution[i], route_cost, vehicle_capacity)){
             worked = true;
         }
     }
@@ -50,7 +50,7 @@ int Swap::calculateSwapCost(int routeCost, int i, int j, const std::vector<Route
             + costMatrix[nodeI][nextJ].cost;
     }
 }
-bool Swap::swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity) {
+bool Swap::swapInRoute(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity) {
     int bestCost = routeCost;
     int bestI;
     int bestJ;

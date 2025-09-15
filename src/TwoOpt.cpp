@@ -1,7 +1,7 @@
 #include "../include/TwoOpt.h"
 #include "../include/Utils.h"
 
-TwoOpt::TwoOpt(node **costMatrix, Utils& utils) : costMatrix(costMatrix), utils(utils) {}
+TwoOpt::TwoOpt(node **costMatrix) : costMatrix(costMatrix) {}
 
 bool TwoOpt::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capacity) {
 
@@ -22,7 +22,7 @@ bool TwoOpt::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capa
 }
 
 bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity) {
-
+    Utils utils;
     int bestCost = routeCost;
     int bestI = -1;
     int bestJ = -1;
