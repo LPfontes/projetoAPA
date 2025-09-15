@@ -22,6 +22,7 @@ public:
     int getTotalCost() const { return totalCost; }
     void setTotalCost(int value) { totalCost = value; }
     void addToTotalCost(int value) { totalCost += value; }
+    void validateSolution() const;
 
 private:
 

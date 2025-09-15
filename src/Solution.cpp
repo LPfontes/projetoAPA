@@ -83,3 +83,7 @@ void Solution::printSolution() const {
     }
     std::cout <<" Custo Total da Solução: " <<getTotalCost()<< std::endl;
 }
+
+void Solution::validateSolution() const {
+    
+}

@@ -4,10 +4,12 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
 
 
     Swap swap(matrix);
+    TwoOpt twoOpt(matrix);
+
     Utils utils;
 
     
-    //int count = 0;
+    int count = 0;
     bool funcionou;
 
     do {
@@ -19,8 +21,13 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
             total_cost = utils.custo_total(solution);
         }
 
-        // count++;
-        // std::cout << "\nVND loop: " << count << std::endl;
+        if(twoOpt.run(solution, vehicle_capacity)) {
+            funcionou = true;
+            total_cost = utils.custo_total(solution);
+        }
+
+        count++;
+        std::cout << "\nVND loop: " << count << std::endl;
 
 
     } while (funcionou);
