@@ -33,17 +33,31 @@ bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, 
     }
 
     for(int i = 1; i < routeSize -1; ++i) {
-        for(int j = i + 4; j < routeSize -1; ++j) {
+        for(int j = i + 3; j < routeSize -1; ++j) {
+            int cost = routeCost - (routeSteps[j+1].accumulatedCost - routeSteps[i-1].accumulatedCost);
+             std::cout << "(" << routeSteps[i].stationOriginId 
+                        << ", " << routeSteps[i].stationId 
+                        << ", " << routeSteps[i].cargo 
+                        << ", " << routeSteps[i].cost 
+                        << ", " << routeSteps[i].accumulatedCost << ")"
+                        << "-> "<< "(" << routeSteps[j].stationOriginId 
+                        << ", " << routeSteps[j].stationId 
+                        << ", " << routeSteps[j].cargo 
+                        << ", " << routeSteps[j].cost 
+                        << ", " << routeSteps[j].accumulatedCost << ")"<< std::endl; 
 
-            int cost = routeCost - (routeSteps[j].accumulatedCost - routeSteps[i].accumulatedCost);
-                      
             for (size_t k = j; k > i; --k) {
-                cost += costMatrix[routeSteps[k].stationId][routeSteps[k-1].stationId].cost;
-            }         
-            
+                std::cout << "(" << routeSteps[k].stationId<< "->" << routeSteps[k-1].stationId <<"cost : "<<costMatrix[routeSteps[k].stationId][routeSteps[k-1].stationId].cost<<std::endl;
+                cost += costMatrix[routeSteps[k].stationId][routeSteps[k -1 ].stationId].cost;
+            }  
+            std::cout << "(" << routeSteps[i-1].stationId<< "->" << routeSteps[j].stationId <<"cost : "<<costMatrix[routeSteps[i-1].stationId][routeSteps[j].stationId].cost<<std::endl;
+            std::cout << "(" << routeSteps[i].stationId<< "->" << routeSteps[j+1].stationId <<"cost : "<<costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost<<std::endl;
+
+            cost += costMatrix[routeSteps[i-1].stationId][routeSteps[j].stationId].cost;      
+            cost += costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost;
 
             if(cost < bestCost) {
-                //std::cout << "\neh menor: " << cost << " tm " << routeSize  << " valor da rota: " << routeCost << " i: " << i << " j " << j << std::endl;
+                std::cout << "\neh menor: " << cost << " tm " << routeSize  << " valor da rota: " << routeCost << " i: " << i << " j " << j << std::endl;
                 
             }
             

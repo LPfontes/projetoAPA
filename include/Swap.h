@@ -19,7 +19,7 @@ private:
 
     node** costMatrix; 
     bool swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity);
-
+    int calculateSwapCost(int routeCost, int i, int j, const std::vector<RouteStep>& routeSteps, node** costMatrix);
 };
 
 
