@@ -35,18 +35,16 @@ bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, 
     for(int i = 1; i < routeSize -1; ++i) {
         for(int j = i + 4; j < routeSize -1; ++j) {
 
-            std::cout << "\nentrou, i: " << i << " j: " << j << std::endl;
-
             int cost = routeCost - (routeSteps[j].accumulatedCost - routeSteps[i].accumulatedCost);
-            std::cout << "\na: " << cost << std::endl;
-
-            //adiciona
-            for (size_t k = j; k > i; k--) {
+                      
+            for (size_t k = j; k > i; --k) {
                 cost += costMatrix[routeSteps[k].stationId][routeSteps[k-1].stationId].cost;
-            }
+            }         
+            
 
             if(cost < bestCost) {
-                std::cout << "\neh menor: " << cost << std::endl;
+                std::cout << "\neh menor: " << cost << " tm " << routeSize  << " valor da rota: " << routeCost << " i: " << i << " j " << j << std::endl;
+                
             }
             
         }
