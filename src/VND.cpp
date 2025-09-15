@@ -1,10 +1,9 @@
 #include "../include/VND.h"
 
 void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int total_cost, int vehicle_capacity){
-
     Utils utils;
     Swap swap(matrix);
-    TwoOpt twoOpt(matrix,utils);
+    TwoOpt twoOpt(matrix);
 
     int count = 0;
     bool funcionou;
@@ -15,19 +14,17 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
 
         if(swap.run(solution, vehicle_capacity)) {
             funcionou = true;
-            total_cost = utils.custo_total(solution);
+            total_cost = utils.custoTotal(solution);
         }
 
         if(twoOpt.run(solution, vehicle_capacity)) {
             funcionou = true;
-            total_cost = utils.custo_total(solution);
+            total_cost = utils.custoTotal(solution);
         }
 
         count++;
         std::cout << "\nVND loop: " << count << std::endl;
 
-
     } while (funcionou);
    
-
 }

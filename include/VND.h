@@ -8,12 +8,10 @@
 #include "Node.h"
 #include "RouteStep.h"
 #include "Swap.h"
-#include "Utils.h"
 #include "TwoOpt.h"
 
 class VND {
 public:
-    
     void vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int total_cost, int vehicle_capacity);
 
 };

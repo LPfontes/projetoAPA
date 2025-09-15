@@ -14,10 +14,7 @@ int Utils::isValid(std::vector<RouteStep> &routeSteps, node **&costMatrix, int v
         if(total_cargo_needed < 0) {
             total_cargo_needed = total_cargo_needed * -1;
         }
-
         if(total_cargo_needed > vehicle_capacity) return -1;
-        
-
         for (size_t i = 0; i < routeSteps.size(); ++i)
         {
             int cargo_at_station = 0;
@@ -52,7 +49,6 @@ int Utils::isValid(std::vector<RouteStep> &routeSteps, node **&costMatrix, int v
 
     } while(total_cargo_needed < 0);
        
-
     return total_cargo_needed;
 
 }
@@ -79,12 +75,9 @@ void Utils::updateRoute(std::vector<RouteStep> &routeSteps, node **&costMatrix)
     }
 }
 
-int Utils::custo_total(std::vector<std::vector<RouteStep>> &solution) {
-
+int Utils::custoTotal(std::vector<std::vector<RouteStep>> &solution) {
     int total = 0;
-
     for (size_t i = 0; i < solution.size(); ++i) {
-
         int route_cost = (solution)[i][(solution)[i].size() - 1].accumulatedCost;
         total += route_cost;
         

@@ -26,7 +26,7 @@ void Solution::bake()  {
     calculateCosts();
 
     std::cout << "\nSolucao gulosa" << std::endl;
-    std::cout << "\nCuto total: " << getTotalCost() << std::endl;
+    std::cout << "\nCusto total: " << getTotalCost() << std::endl;
     printSolution();
 
     std::cout << "\nVND" << std::endl;
@@ -34,7 +34,7 @@ void Solution::bake()  {
     vnd.vnd(*this->solution, costMatrix, getTotalCost(), this->instance->getVehicleCapacity());
 
     calculateCosts();
-    std::cout << "\nCuto total: " << getTotalCost() << std::endl;
+    std::cout << "\nCusto total: " << getTotalCost() << std::endl;
 
     printSolution();
 
@@ -84,6 +84,3 @@ void Solution::printSolution() const {
     std::cout <<" Custo Total da Solução: " <<getTotalCost()<< std::endl;
 }
 
-void Solution::validateSolution() const {
-    
-}
