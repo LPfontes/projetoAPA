@@ -4,7 +4,7 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
 
     Utils utils;
     Swap swap(matrix);
-    TwoOpt twoOpt(matrix,utils);
+    TwoOpt twoOpt(matrix);
 
     int count = 0;
     bool funcionou;

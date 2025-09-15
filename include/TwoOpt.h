@@ -12,11 +12,10 @@
 class TwoOpt {
 public:
 
-    TwoOpt(node** costMatrix,Utils& utils);
+    TwoOpt(node** costMatrix);
     bool run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capacity);
 
 private:
-    Utils& utils;
     node** costMatrix; 
     bool twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity);
 

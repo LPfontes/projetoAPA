@@ -18,9 +18,6 @@ LowerCost::LowerCost(int numberOfVehicles, int stations, int limitCapacityVehicl
     
     currentRoute = 0;
 }
-
-
-
 // Algoritimo guloso para obter a rota inicial
 void LowerCost::makeRoutes(node** costMatrix) {
 
