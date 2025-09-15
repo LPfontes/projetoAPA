@@ -43,7 +43,7 @@ bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, 
             
 
             if(cost < bestCost) {
-                std::cout << "\neh menor: " << cost << " tm " << routeSize  << " valor da rota: " << routeCost << " i: " << i << " j " << j << std::endl;
+                //std::cout << "\neh menor: " << cost << " tm " << routeSize  << " valor da rota: " << routeCost << " i: " << i << " j " << j << std::endl;
                 
             }
             
