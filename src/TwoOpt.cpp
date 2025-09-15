@@ -1,6 +1,6 @@
 #include "../include/TwoOpt.h"
 
-TwoOpt::TwoOpt(node **costMatrix) : costMatrix(costMatrix) {}
+TwoOpt::TwoOpt(node **costMatrix, Utils& utils) : costMatrix(costMatrix), utils(utils) {}
 
 bool TwoOpt::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capacity) {
 
@@ -23,47 +23,55 @@ bool TwoOpt::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capa
 bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity) {
 
     int bestCost = routeCost;
-    int bestI;
-    int bestJ;
-    int best_init;
+    int bestI = -1;
+    int bestJ = -1;
     int routeSize = routeSteps.size();
 
     if(routeSize < 6) {
         return false;
     }
 
+    // Busca o melhor movimento 2-opt
     for(int i = 1; i < routeSize -1; ++i) {
         for(int j = i + 3; j < routeSize -1; ++j) {
             int cost = routeCost - (routeSteps[j+1].accumulatedCost - routeSteps[i-1].accumulatedCost);
-             std::cout << "(" << routeSteps[i].stationOriginId 
-                        << ", " << routeSteps[i].stationId 
-                        << ", " << routeSteps[i].cargo 
-                        << ", " << routeSteps[i].cost 
-                        << ", " << routeSteps[i].accumulatedCost << ")"
-                        << "-> "<< "(" << routeSteps[j].stationOriginId 
-                        << ", " << routeSteps[j].stationId 
-                        << ", " << routeSteps[j].cargo 
-                        << ", " << routeSteps[j].cost 
-                        << ", " << routeSteps[j].accumulatedCost << ")"<< std::endl; 
 
             for (size_t k = j; k > i; --k) {
-                std::cout << "(" << routeSteps[k].stationId<< "->" << routeSteps[k-1].stationId <<"cost : "<<costMatrix[routeSteps[k].stationId][routeSteps[k-1].stationId].cost<<std::endl;
                 cost += costMatrix[routeSteps[k].stationId][routeSteps[k -1 ].stationId].cost;
             }  
-            std::cout << "(" << routeSteps[i-1].stationId<< "->" << routeSteps[j].stationId <<"cost : "<<costMatrix[routeSteps[i-1].stationId][routeSteps[j].stationId].cost<<std::endl;
-            std::cout << "(" << routeSteps[i].stationId<< "->" << routeSteps[j+1].stationId <<"cost : "<<costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost<<std::endl;
-
+            
             cost += costMatrix[routeSteps[i-1].stationId][routeSteps[j].stationId].cost;      
             cost += costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost;
 
             if(cost < bestCost) {
-                std::cout << "\neh menor: " << cost << " tm " << routeSize  << " valor da rota: " << routeCost << " i: " << i << " j " << j << std::endl;
-                
+                bestI = i;
+                bestJ = j;
+                bestCost = cost;
             }
-            
+        }
+    }
+
+    // Se encontrou uma melhoria, aplica a troca
+    if (bestI != -1 && bestJ != -1) {
+        std::vector<RouteStep> tempRoute = routeSteps;
+
+        // Inverte o segmento entre bestI e bestJ
+        std::reverse(tempRoute.begin() + bestI, tempRoute.begin() + bestJ + 1);
+
+        // Atualiza custos e cargas do tempRoute
+        int totalRouteCost = 0;
+        for (size_t idx = 1; idx < tempRoute.size(); ++idx) {
+            tempRoute[idx].cost = costMatrix[tempRoute[idx-1].stationId][tempRoute[idx].stationId].cost;
+            totalRouteCost += tempRoute[idx].cost;
+            tempRoute[idx].accumulatedCost = totalRouteCost;
+            tempRoute[idx].cargo = tempRoute[idx-1].cargo + costMatrix[tempRoute[idx-1].stationId][tempRoute[idx].stationId].request;
+        }
+
+        if (utils.isValid(tempRoute, costMatrix, vehicleCapacity) != -1) {
+            routeSteps = tempRoute;
+            return true;
         }
     }
 
     return false;
-
 }

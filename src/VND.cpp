@@ -2,13 +2,10 @@
 
 void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int total_cost, int vehicle_capacity){
 
-
-    Swap swap(matrix);
-    TwoOpt twoOpt(matrix);
-
     Utils utils;
+    Swap swap(matrix);
+    TwoOpt twoOpt(matrix,utils);
 
-    
     int count = 0;
     bool funcionou;
 

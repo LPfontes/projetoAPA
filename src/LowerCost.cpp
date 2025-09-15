@@ -40,12 +40,19 @@ void LowerCost::makeRoutes(node** costMatrix) {
             if (stationsNotVisited[dest]) {
                 if ((currentStation == 0 && VehicleLoad + req < limitCapacityVehicle) ||
                     (currentStation != 0 && VehicleLoad + req < limitCapacityVehicle && VehicleLoad + req > 0)) {
+
+                    // Se está no depósito e a requisição é negativa, atualiza a carga inicial para suprir a req
+                    if (currentStation == 0 && req < 0) {
+                        VehicleLoad = -req;
+                        currentRouteSteps[0].cargo = VehicleLoad;
+                    }
+
                     VehicleLoad += req;
                     if (VehicleLoad < 0) VehicleLoad = -VehicleLoad;
                     
                     stationsNotVisited[dest] = 0;
                     totalRouteCost += costMatrix[currentStation][i].cost;
-                    currentRouteSteps.push_back(RouteStep{currentStation,costMatrix[currentStation][i].destinyStation, VehicleLoad, costMatrix[currentStation][i].cost,totalRouteCost});
+                    currentRouteSteps.push_back(RouteStep{currentStation, costMatrix[currentStation][i].destinyStation, VehicleLoad, costMatrix[currentStation][i].cost, totalRouteCost});
                     quantStationsNotVisited--;
                     currentStation = dest;
                     found = true;
