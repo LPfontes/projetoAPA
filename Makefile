@@ -24,7 +24,8 @@ $(TARGET): $(OBJS)
 
 # Regra de compilação para cada arquivo .cpp -> .o
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(@D) # Cria o diretório de build se não existir
+# Cria o diretório de build se não existir
+	@mkdir -p $(@D) 
 	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(INCLUDE_DIR)
 
 .PHONY: run

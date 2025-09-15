@@ -1,4 +1,5 @@
 #include "../include/TwoOpt.h"
+#include "../include/Utils.h"
 
 TwoOpt::TwoOpt(node **costMatrix) : costMatrix(costMatrix) {}
 

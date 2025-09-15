@@ -7,7 +7,10 @@
 #include "Solution.h"
 #include "Node.h"
 #include "RouteStep.h"
-#include "Utils.h"
+
+
+// Correção de dependência circular
+class Utils;
 
 class TwoOpt {
 public:

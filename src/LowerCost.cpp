@@ -18,6 +18,9 @@ LowerCost::LowerCost(int numberOfVehicles, int stations, int limitCapacityVehicl
     
     currentRoute = 0;
 }
+
+
+
 // Algoritimo guloso para obter a rota inicial
 void LowerCost::makeRoutes(node** costMatrix) {
 
@@ -65,7 +68,8 @@ void LowerCost::makeRoutes(node** costMatrix) {
     }
     
     if (quantStationsNotVisited == 0) {
-        currentRouteSteps.push_back(RouteStep{currentStation,0, VehicleLoad, costMatrix[currentStation][0].cost});
+        totalRouteCost += costMatrix[currentStation][0].cost;
+        currentRouteSteps.push_back(RouteStep{currentStation,0, VehicleLoad, costMatrix[currentStation][0].cost,totalRouteCost});
     }
 
     VehicleRoutes[currentRoute] = currentRouteSteps;
@@ -81,54 +85,4 @@ std::vector<std::vector<RouteStep>>* LowerCost::Solution(node** costMatrix) {
     }
 
     return &VehicleRoutes;
-}
-void LowerCost::swapVerticesInRoute(int routeIndex, int posA, int posB,node** costMatrix) {
-    if (routeIndex < 0 || routeIndex >= VehicleRoutes.size()) return;
-    auto& route = VehicleRoutes[routeIndex];
-    if (posA <= 0 || posA >= route.size() || posB <= 0 || posB >= route.size()) return;
-
-    // Calcula o novo cargo após a troca
-    int originCargo1 = (posA > 0) ? route[posA-1].cargo : 0;
-    int originCargo2 = (posB > 0) ? route[posB-1].cargo : 0;
-
-    // Verifica se a troca é válida considerando a capacidade do veículo
-    int newCargoB = originCargo1 + costMatrix[route[posB].getStationOriginId()][route[posB].getStationId()].request;
-    int newCargoA = originCargo2 + costMatrix[route[posA].getStationOriginId()][route[posA].getStationId()].request;
-
-    if (newCargoB <= limitCapacityVehicle && newCargoA <= limitCapacityVehicle) {
-    // Verifica se alguma das novas cargas é negativa
-    if ((newCargoB < 0 && route[posA-1].getStationId() != 0) ||
-        (newCargoA < 0 && route[posB-1].getStationId() != 0)) {
-        return;
-    }
-
-    if (newCargoB < 0) {
-    if (route[posA-1].getStationId() == 0) {
-        route[posA-1].setCargo(-newCargoB);
-    } 
-    }
-    if (newCargoA < 0) {
-    if (route[posB-1].getStationId() == 0) {
-        route[posB-1].setCargo(-newCargoA);
-    } 
-    // Realiza a troca dos stationId
-    auto aux = route[posA].getStationId();
-    route[posA].setStationId(route[posB].getStationId());
-    route[posB].setStationId(aux);
-
-    // Atualiza os custos acumulados após a troca
-    int totalRouteCost = 0;
-    for (size_t i = 0; i < route.size(); ++i) {
-        if (i == 0) {
-            route[i].accumulatedCost = 0;
-        } else {
-           
-            route[i].cost = costMatrix[route[i].getStationOriginId()][route[i].getStationId()].cost;
-            totalRouteCost += route[i].cost;
-            route[i].accumulatedCost = totalRouteCost;
-            route[i].cargo = route[i-1].cargo + costMatrix[route[i].getStationOriginId()][route[i].getStationId()].request;
-        }
-    }
-}
-}
 }

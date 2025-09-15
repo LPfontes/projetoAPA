@@ -1,5 +1,5 @@
 #ifndef H_SOLUTION_H
-#define H_SOLUTION_H
+#define H_SOLUTION_H 
 
 #include <iostream>
 #include <string>
