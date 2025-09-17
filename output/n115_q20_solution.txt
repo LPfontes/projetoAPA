@@ -1,0 +1,14 @@
+
+-----------------------   n115_q20 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 157115
+Valor solução: 692103
+Tempo de execucao: 0.851953 ms
+Gap: 340.507%
+
+VND:
+Ótimo: 157115
+Valor solução: 403329
+Tempo de execucao: 29.1524 ms
+Gap: 156.709%

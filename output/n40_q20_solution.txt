@@ -1,0 +1,14 @@
+
+-----------------------   n40_q20 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 59493
+Valor solução: 175332
+Tempo de execucao: 0.143581 ms
+Gap: 194.71%
+
+VND:
+Ótimo: 59493
+Valor solução: 133864
+Tempo de execucao: 0.815251 ms
+Gap: 125.008%
