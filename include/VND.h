@@ -8,6 +8,7 @@
 #include "Node.h"
 #include "RouteStep.h"
 #include "Swap.h"
+#include "Swap2.h"
 #include "Utils.h"
 #include "TwoOpt.h"
 

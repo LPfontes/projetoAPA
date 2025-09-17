@@ -3,7 +3,7 @@
 int Utils::isValid(std::vector<RouteStep> &routeSteps, node **&costMatrix, int vehicle_capacity)
 {
 
-    int total_cargo_needed = routeSteps[0].cargo;
+    int total_cargo_needed = 0; //routeSteps[0].cargo;
     int current_cargo = total_cargo_needed;
     int loop = 0;
     bool valid;
@@ -20,6 +20,7 @@ int Utils::isValid(std::vector<RouteStep> &routeSteps, node **&costMatrix, int v
 
         for (size_t i = 0; i < routeSteps.size(); ++i)
         {
+
             int cargo_at_station = 0;
 
             if (i == 0)
