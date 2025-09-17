@@ -56,6 +56,7 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
             if (routCostAfterInsertion < bestCost) {
                 std::vector<RouteStep> tempRoute = routeSteps;
 
+
                 int isValid = utils.isValid(tempRoute, costMatrix, vehicleCapacity);
                 if (isValid != -1)
                 {
@@ -64,7 +65,6 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
                     bestI = i;
                     bestJ = j;
                     // best_init = isValid;
-
                 }
             }
         }
