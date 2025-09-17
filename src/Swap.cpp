@@ -17,6 +17,7 @@ bool Swap::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capaci
 
     return worked;
 }
+
 int Swap::calculateSwapCost(int routeCost, int i, int j, const std::vector<RouteStep>& routeSteps, node** costMatrix) {
     int prevI = routeSteps[i - 1].stationId;  
     int nodeI = routeSteps[i].stationId;      

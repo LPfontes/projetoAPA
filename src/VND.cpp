@@ -4,7 +4,8 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
 
     Utils utils;
     Swap swap(matrix);
-    TwoOpt twoOpt(matrix,utils);
+    TwoOpt twoOpt(matrix);
+    ReInsertion reInsertion(matrix);
 
     int count = 0;
     bool funcionou;
@@ -22,6 +23,11 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
             funcionou = true;
             total_cost = utils.custo_total(solution);
         }
+
+        // if(reInsertion.run(solution, vehicle_capacity)) {
+        //     funcionou = true;
+        //     total_cost = utils.custo_total(solution);
+        // }
 
         count++;
         std::cout << "\nVND loop: " << count << std::endl;

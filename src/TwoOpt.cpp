@@ -1,7 +1,7 @@
 #include "../include/TwoOpt.h"
 #include "../include/Utils.h"
 
-TwoOpt::TwoOpt(node **costMatrix, Utils& utils) : costMatrix(costMatrix), utils(utils) {}
+TwoOpt::TwoOpt(node **costMatrix) : costMatrix(costMatrix) {}
 
 bool TwoOpt::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capacity) {
 
@@ -27,6 +27,7 @@ bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, 
     int bestI = -1;
     int bestJ = -1;
     int routeSize = routeSteps.size();
+    Utils utils;
 
     if(routeSize < 6) {
         return false;
@@ -38,7 +39,7 @@ bool TwoOpt::twoopt_in_route(std::vector<RouteStep> &routeSteps, int routeCost, 
             int cost = routeCost - (routeSteps[j+1].accumulatedCost - routeSteps[i-1].accumulatedCost);
 
             for (size_t k = j; k > i; --k) {
-                cost += costMatrix[routeSteps[k].stationId][routeSteps[k -1 ].stationId].cost;
+                cost += costMatrix[routeSteps[k].stationId][routeSteps[k -1].stationId].cost;
             }  
             
             cost += costMatrix[routeSteps[i-1].stationId][routeSteps[j].stationId].cost;      
