@@ -38,8 +38,8 @@ void LowerCost::makeRoutes(node** costMatrix) {
             int req = costMatrix[currentStation][i].request;
 
             if (stationsNotVisited[dest]) {
-                if ((currentStation == 0 && VehicleLoad + req < limitCapacityVehicle) ||
-                    (currentStation != 0 && VehicleLoad + req < limitCapacityVehicle && VehicleLoad + req > 0)) {
+                if ((currentStation == 0 && VehicleLoad + req <= limitCapacityVehicle) ||
+                    (currentStation != 0 && VehicleLoad + req <= limitCapacityVehicle && VehicleLoad + req >= 0)) {
 
                     // Se está no depósito e a requisição é negativa, atualiza a carga inicial para suprir a req
                     if (currentStation == 0 && req < 0) {
