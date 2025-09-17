@@ -29,7 +29,7 @@ void VND::vnd(std::vector<std::vector<RouteStep>> &solution, node** &matrix, int
         if(reInsertion.run(solution, vehicle_capacity)) {
             funcionou = true;
             total_cost = utils.custo_total(solution);
-            std::cout << "\nREINSERTION funcionou: " << total_cost << std::endl;
+            // std::cout << "\nREINSERTION funcionou: " << total_cost << std::endl;
         }
 
         count++;

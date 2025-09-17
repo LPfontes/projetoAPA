@@ -44,13 +44,13 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
             if (j == i) continue; // Solução original
 
             // Inserção anterior de i
-            if (i < j) {
+            if (i > j) {
                 routCostAfterInsertion = routCostAfterRemoval 
                                    - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost 
                                    + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost 
                                    + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;
             } 
-            // Inserição posterior de i
+            // Inserção posterior de i
             else {
                 routCostAfterInsertion = routCostAfterRemoval
                                    - costMatrix[routeSteps[j].stationId][routeSteps[j+1].stationId].cost 
