@@ -44,19 +44,24 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
             if (j == i) continue; // Solução original
 
             // Inserção anterior de i
-            if (i > j) {
-                routCostAfterInsertion = routCostAfterRemoval 
-                                   - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost 
-                                   + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost 
-                                   + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;
-            } 
-            // Inserção posterior de i
-            else {
-                routCostAfterInsertion = routCostAfterRemoval
-                                   - costMatrix[routeSteps[j].stationId][routeSteps[j+1].stationId].cost 
-                                   + costMatrix[routeSteps[j].stationId][routeSteps[i].stationId].cost
-                                   + costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost;
-            }
+            // if (i > j) {
+            //     routCostAfterInsertion = routCostAfterRemoval 
+            //                        - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost 
+            //                        + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost 
+            //                        + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;
+            // } 
+            // // Inserção posterior de i
+            // else {
+            //     routCostAfterInsertion = routCostAfterRemoval
+            //                        - costMatrix[routeSteps[j].stationId][routeSteps[j+1].stationId].cost 
+            //                        + costMatrix[routeSteps[j].stationId][routeSteps[i].stationId].cost
+            //                        + costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost;
+            // }
+            // Lógica Única e Consistente
+            int costAfterInsertion = routCostAfterRemoval
+                - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost // Remove aresta antes de j
+                + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost // Adiciona (j-1) -> i
+                + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;  // Adiciona i -> j
 
             if (routCostAfterInsertion < bestCost) {
                 // Fizemos um meio termo entre melhor rota viável e eficiencia

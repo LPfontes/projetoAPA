@@ -4,11 +4,11 @@
 Heuristica construtiva:
 Ótimo: 13500
 Valor solução: 17100
-Tempo de execucao: 0.060272 ms
+Tempo de execucao: 0.0837 ms
 Gap: 26.6667%
 
 VND:
 Ótimo: 13500
 Valor solução: 15500
-Tempo de execucao: 0.096882 ms
+Tempo de execucao: 0.1261 ms
 Gap: 14.8148%
