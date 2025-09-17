@@ -1,0 +1,14 @@
+
+-----------------------   n81_q10 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 388680
+Valor solução: 663158
+Tempo de execucao: 0.396241 ms
+Gap: 70.618%
+
+VND:
+Ótimo: 388680
+Valor solução: 612463
+Tempo de execucao: 8.67537 ms
+Gap: 57.5751%

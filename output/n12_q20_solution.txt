@@ -1,0 +1,14 @@
+
+-----------------------   n12_q20 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 15700
+Valor solução: 44100
+Tempo de execucao: 0.059579 ms
+Gap: 180.892%
+
+VND:
+Ótimo: 15700
+Valor solução: 28400
+Tempo de execucao: 0.120438 ms
+Gap: 80.8917%

@@ -1,0 +1,14 @@
+
+-----------------------   n26_q30 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 30300
+Valor solução: 67700
+Tempo de execucao: 0.055621 ms
+Gap: 123.432%
+
+VND:
+Ótimo: 30300
+Valor solução: 48300
+Tempo de execucao: 0.216912 ms
+Gap: 59.4059%

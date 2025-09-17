@@ -1,0 +1,14 @@
+
+-----------------------   n58_q30 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 65669
+Valor solução: 123550
+Tempo de execucao: 0.30457 ms
+Gap: 88.1405%
+
+VND:
+Ótimo: 65669
+Valor solução: 98761
+Tempo de execucao: 4.22286 ms
+Gap: 50.3921%

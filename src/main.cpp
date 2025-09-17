@@ -58,7 +58,6 @@ int main(int argc, char* argv[]) {
 
         for (size_t i = 0; i < solucoes.size(); i++) {
 
-            std::cout << "\n-----------------------   " << instancias_teste[i] << " -------------------------------\n "  << std::endl;
 
             // Abrindo o arquivo de entrada
             std::ifstream arquivo("./input/" + instancias_teste[i] + ".txt");
@@ -66,6 +65,19 @@ int main(int argc, char* argv[]) {
                 std::cerr << "Erro ao abrir o arquivo entrada.txt" << std::endl;
                 return 1;
             }
+
+             // Criar arquivo de saída específico para cada instância
+            std::ofstream out("./output/" + instancias_teste[i] + "_solution.txt");
+            if (!out.is_open()) {
+                std::cerr << "Erro ao criar arquivo de saída" << std::endl;
+                return 1;
+            }
+
+            // Redireciona std::cout para o arquivo temporariamente
+            std::streambuf* coutbuf = std::cout.rdbuf(); 
+            std::cout.rdbuf(out.rdbuf());
+
+            std::cout << "\n-----------------------   " << instancias_teste[i] << " -------------------------------\n "  << std::endl;
 
             // Cria a intancia
             Instance instance(arquivo);
@@ -77,6 +89,11 @@ int main(int argc, char* argv[]) {
             //gera a solucao
             Solution solution(&instance);
             solution.GAP(solucoes[i]);
+
+            // Restaura cout para o console
+            std::cout.rdbuf(coutbuf);
+
+            std::cout << "Arquivo de saída criado: ./output/" << instancias_teste[i] << ".txt" << std::endl;
             
         }
 

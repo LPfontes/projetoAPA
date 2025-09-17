@@ -1,0 +1,14 @@
+
+-----------------------   n54_q30 -------------------------------
+ 
+Heuristica construtiva:
+Ótimo: 120277
+Valor solução: 550598
+Tempo de execucao: 0.256492 ms
+Gap: 357.775%
+
+VND:
+Ótimo: 120277
+Valor solução: 406839
+Tempo de execucao: 2.96444 ms
+Gap: 238.252%
