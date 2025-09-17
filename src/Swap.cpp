@@ -65,7 +65,9 @@ bool Swap::swap_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int 
         for (int j = i + 1; j < routeSize - 1; ++j){
             int cost = calculateSwapCost(routeCost, i, j, routeSteps, costMatrix);
             if (cost < bestCost){
+
                 std::vector<RouteStep> tempRoute = routeSteps;
+                std::swap(tempRoute[i], tempRoute[j]);
 
                 int isValid = utils.isValid(tempRoute, costMatrix, vehicleCapacity);
                 if (isValid != -1)

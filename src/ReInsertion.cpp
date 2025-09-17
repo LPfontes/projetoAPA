@@ -78,7 +78,8 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
         }
     }
 
-    if (bestI != -1) {
+    if (bestCost < routeCost & bestI != -1) {
+        
         RouteStep nodeToMove = routeSteps[bestI];
         routeSteps.erase(routeSteps.begin() + bestI);
         int insertionIndex = bestJ;
@@ -88,6 +89,8 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
         }
         routeSteps.insert(routeSteps.begin() + insertionIndex, nodeToMove);
         utils.updateRoute(routeSteps, costMatrix);
+
+        std::cout << "\nREINSERTION funcionou: " << bestCost << std::endl;
 
         return true;
     }
