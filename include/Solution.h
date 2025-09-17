@@ -8,6 +8,7 @@
 #include "LowerCost.h"
 #include "Sort.h" 
 #include "VND.h"
+#include <chrono>
 
 class Solution {
 public:
@@ -15,6 +16,7 @@ public:
     Solution(Instance* instance);
 
     void bake();
+    void GAP(int bestCost);
     void printSolution() const;
     //const std::vector<std::vector<int>>& getSolution() const;
 
@@ -23,6 +25,7 @@ public:
     void setTotalCost(int value) { totalCost = value; }
     void addToTotalCost(int value) { totalCost += value; }
     void validateSolution() const;
+    void printGAP(int best, int found, double time);
 
 private:
 
