@@ -8,7 +8,7 @@ bool Swap::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capaci
 
     for (size_t i = 0; i < solution.size(); ++i){
 
-        int route_cost = (solution)[i][(solution)[i].size() - 1].accumulatedCost;
+        int route_cost = solution[i].back().accumulatedCost;
 
         if (swap_in_route(solution[i], route_cost, vehicle_capacity)){
             worked = true;

@@ -9,7 +9,7 @@ bool TwoOpt::run(std::vector<std::vector<RouteStep>> &solution, int vehicle_capa
 
     for (size_t i = 0; i < solution.size(); ++i)
     {
-        int route_cost = (solution)[i][(solution)[i].size() - 1].accumulatedCost;
+        int route_cost = solution[i].back().accumulatedCost;
 
         if (twoopt_in_route(solution[i], route_cost, vehicle_capacity))
         {

@@ -8,11 +8,12 @@ bool ReInsertion::run(std::vector<std::vector<RouteStep>> &solution, int vehicle
 
     for (size_t i = 0; i < solution.size(); ++i)
     {
-        int route_cost = (solution)[i][(solution)[i].size() - 1].accumulatedCost;
+        int route_cost = solution[i].back().accumulatedCost;
 
         if (reinsertion_in_route(solution[i], route_cost, vehicle_capacity))
         {
             worked = true;
+            
         }
     }
 
@@ -26,6 +27,10 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
     int bestJ = -1;
     int routeSize = routeSteps.size();
     Utils utils;
+
+    if (routeSize < 4) { 
+        return false;
+    }
 
     for (int i=1; i < routeSize-1; i++) {
         int routCostAfterRemoval = routeCost 
@@ -54,29 +59,38 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
             }
 
             if (routCostAfterInsertion < bestCost) {
+                // Fizemos um meio termo entre melhor rota viável e eficiencia
                 std::vector<RouteStep> tempRoute = routeSteps;
 
+                tempRoute.erase(tempRoute.begin() + i);
 
-                int isValid = utils.isValid(tempRoute, costMatrix, vehicleCapacity);
-                if (isValid != -1)
-                {
-                    routeSteps = tempRoute;
+                int insertionIndex = j;
+                if (bestI < bestJ) {
+                    insertionIndex--;
+                }
+
+                if (utils.isValid(tempRoute, costMatrix, vehicleCapacity) != -1) {
                     bestCost = routCostAfterInsertion;
                     bestI = i;
                     bestJ = j;
-                    // best_init = isValid;
                 }
             }
         }
     }
 
     if (bestI != -1) {
+        RouteStep nodeToMove = routeSteps[bestI];
+        routeSteps.erase(routeSteps.begin() + bestI);
+        int insertionIndex = bestJ;
 
+        if( bestI < bestJ) {
+            insertionIndex--;
+        }
+        routeSteps.insert(routeSteps.begin() + insertionIndex, nodeToMove);
+        utils.updateRoute(routeSteps, costMatrix);
+
+        return true;
     }
 
-
-}
-
-int ReInsertion::calculateReinsertionCost(int routeCost, int i, int j, const std::vector<RouteStep>& routeSteps, node** costMatrix) {
-
+    return false;
 }

@@ -17,7 +17,6 @@ public:
 private:
     node** costMatrix; 
     bool reinsertion_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity);
-    int calculateReinsertionCost(int routeCost, int i, int j, const std::vector<RouteStep>& routeSteps, node** costMatrix);
 };
 
 
