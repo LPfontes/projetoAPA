@@ -22,10 +22,10 @@ bool ReInsertion::run(std::vector<std::vector<RouteStep>> &solution, int vehicle
 
 bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int routeCost, int vehicleCapacity) {
     
+    bool worked = false;
     int bestCost = routeCost;
-    int bestI = -1;
-    int bestJ = -1;
     int routeSize = routeSteps.size();
+    std::vector<RouteStep> bestRoute;
     Utils utils;
 
     if (routeSize < 4) { 
@@ -39,59 +39,43 @@ bool ReInsertion::reinsertion_in_route(std::vector<RouteStep> &routeSteps, int r
                                    +costMatrix[routeSteps[i-1].stationId][routeSteps[i+1].stationId].cost;
             
         for (int j=1; j < routeSize-1; j++) {
-            int routCostAfterInsertion;
-
+            
             if (j == i) continue; // Solução original
 
-            // Inserção anterior de i
-            // if (i > j) {
-            //     routCostAfterInsertion = routCostAfterRemoval 
-            //                        - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost 
-            //                        + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost 
-            //                        + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;
-            // } 
-            // // Inserção posterior de i
-            // else {
-            //     routCostAfterInsertion = routCostAfterRemoval
-            //                        - costMatrix[routeSteps[j].stationId][routeSteps[j+1].stationId].cost 
-            //                        + costMatrix[routeSteps[j].stationId][routeSteps[i].stationId].cost
-            //                        + costMatrix[routeSteps[i].stationId][routeSteps[j+1].stationId].cost;
-            // }
-            // Lógica Única e Consistente
-            int costAfterInsertion = routCostAfterRemoval
-                - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost // Remove aresta antes de j
-                + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost // Adiciona (j-1) -> i
-                + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;  // Adiciona i -> j
+            // Lógica 
+            int routCostAfterInsertion = routCostAfterRemoval
+                - costMatrix[routeSteps[j-1].stationId][routeSteps[j].stationId].cost
+                + costMatrix[routeSteps[j-1].stationId][routeSteps[i].stationId].cost
+                + costMatrix[routeSteps[i].stationId][routeSteps[j].stationId].cost;
 
             if (routCostAfterInsertion < bestCost) {
-                // Fizemos um meio termo entre melhor rota viável e eficiencia
+                // testar rota com inserção
                 std::vector<RouteStep> tempRoute = routeSteps;
-
+                RouteStep nodeToMove = tempRoute[i];
                 tempRoute.erase(tempRoute.begin() + i);
 
                 int insertionIndex = j;
-                if (bestI < bestJ) {
-                    insertionIndex--;
+
+                if (i < j) {
+                    insertionIndex--; // ajuste pq removemos antes
                 }
 
+                tempRoute.insert(tempRoute.begin() + insertionIndex, nodeToMove);
+                utils.updateRoute(tempRoute, costMatrix);
+                
                 if (utils.isValid(tempRoute, costMatrix, vehicleCapacity) != -1) {
-                    bestCost = routCostAfterInsertion;
-                    bestI = i;
-                    bestJ = j;
+                    if (tempRoute.back().accumulatedCost < routeSteps.back().accumulatedCost) {
+                        bestRoute = tempRoute;
+                        bestCost = routCostAfterInsertion;
+                        worked = true;
+                    }
                 }
             }
         }
     }
 
-    if (bestI != -1) {
-        RouteStep nodeToMove = routeSteps[bestI];
-        routeSteps.erase(routeSteps.begin() + bestI);
-        int insertionIndex = bestJ;
-
-        if( bestI < bestJ) {
-            insertionIndex--;
-        }
-        routeSteps.insert(routeSteps.begin() + insertionIndex, nodeToMove);
+    if (worked) {
+        routeSteps = bestRoute;
         utils.updateRoute(routeSteps, costMatrix);
 
         return true;
