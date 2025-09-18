@@ -46,9 +46,9 @@ A classe RouteStep representa um movimento na rota construída, armazenando as i
 ./src/VND.cpp - A lógica de execução do VND utilizando os algoritmos de vizinhança descritos  a seguir.
 
 #### Algoritmos de vizinhança:
-	
-Swap - ./src/swap.cpp - Implementado conforme demonstrado na vídeo aula, realiza as permutações em cada rota.
 		
 2-Opt - ./src/TwoOpt.cpp - Também implementado conforme demonstrado na vídeo aula. Realiza as trocas em cada rota. 
 
-Swap2 - ./src/swap2.cpp - Implementado conforme demonstrado na vídeo aula, com a modificação que permite não apenas trocar nós dentro de uma mesma rota, mas também realizar permutações entre diferentes rotas.
+ReInsertion - ./src/ReInsertion.cpp - Implementado como mostrado ao final da vídeo aula. Atua a partir do reposicionamento do nó na rota encontrada. 
+
+Swap - ./src/swap2.cpp - Implementado conforme demonstrado na vídeo aula, com a modificação que permite não apenas trocar nós dentro de uma mesma rota, mas também realizar permutações entre diferentes rotas.
