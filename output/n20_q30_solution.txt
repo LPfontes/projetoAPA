@@ -1,14 +1,3 @@
-
------------------------   n20_q30 -------------------------------
- 
-Heuristica construtiva:
-Ótimo: 76999
-Valor solução: 87670
-Tempo de execucao: 0.102941 ms
-Gap: 13.8586%
-
-VND:
-Ótimo: 76999
-Valor solução: 79239
-Tempo de execucao: 3.42771 ms
-Gap: 2.90913%
+79239
+1
+0 20 18 17 13 6 5 3 7 9 1 14 10 12 2 4 8 19 15 11 16 0 

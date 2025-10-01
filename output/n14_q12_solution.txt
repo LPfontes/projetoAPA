@@ -1,14 +1,4 @@
-
------------------------   n14_q12 -------------------------------
- 
-Heuristica construtiva:
-Ótimo: 13500
-Valor solução: 17100
-Tempo de execucao: 0.061816 ms
-Gap: 26.6667%
-
-VND:
-Ótimo: 13500
-Valor solução: 15600
-Tempo de execucao: 0.322652 ms
-Gap: 15.5556%
+15600
+2
+0 8 3 13 2 10 14 7 11 4 12 1 6 9 0 
+0 5 0 

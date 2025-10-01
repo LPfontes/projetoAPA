@@ -27,22 +27,22 @@ void Solution::bake()  {
 
     calculateCosts();
 
-    std::cout << "\nSolucao gulosa" << std::endl;
-    std::cout << "\nCuto total: " << getTotalCost() << std::endl;
-    printSolution();
+    //std::cout << "\nSolucao gulosa" << std::endl;
+    //std::cout << "\nCuto total: " << getTotalCost() << std::endl;
+    //printSolution();
 
-    std::cout << "\nVND" << std::endl;
+    //std::cout << "\nVND" << std::endl;
     VND vnd;
     vnd.vnd(*this->solution, costMatrix, getTotalCost(), this->instance->getVehicleCapacity());
 
     calculateCosts();
-    std::cout << "\nCuto total: " << getTotalCost() << std::endl;
+    //std::cout << "\nCuto total: " << getTotalCost() << std::endl;
 
     printSolution();
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> duration = end - start;
-    std::cout << "Tempo de execucao: " << duration.count() << " ms\n";
+    //std::cout << "Tempo de execucao: " << duration.count() << " ms\n";
 
 
 }
@@ -80,8 +80,8 @@ void Solution::GAP(int bestCost) {
     // ------------------------------------------------------------------------------
 
     int custo_gulosa = getTotalCost();
-    std::cout << "Heuristica construtiva:\n";
-    printGAP(bestCost, custo_gulosa, duration_guloso.count());
+    //std::cout << "Heuristica construtiva:\n";
+    //printGAP(bestCost, custo_gulosa, duration_guloso.count());
 
     // --------------------------------- VND ------------------------------------
 
@@ -98,8 +98,9 @@ void Solution::GAP(int bestCost) {
     // -----------------------------------------------------------------------
 
     int custo_vnd =  getTotalCost();
-    std::cout << "\nVND:\n";
-    printGAP(bestCost, custo_vnd, duration_vnd.count());
+    //std::cout << "\nVND:\n";
+    printSolution();
+    //printGAP(bestCost, custo_vnd, duration_vnd.count());
 
   
 
@@ -109,11 +110,11 @@ void Solution::printGAP(int best, int found, double time) {
 
     double gap = ((static_cast<double>(found) - best) / best) * 100.0;
 
-    std::cout << "Ótimo: " << best << std::endl;
+    std::cout << best << std::endl;
+    std::cout << (*this->solution).size() << std::endl;
     std::cout << "Valor solução: " << found << std::endl;
     std::cout << "Tempo de execucao: " << time << " ms" << std::endl;
     std::cout << "Gap: " << gap << "%" << std::endl;
-
 
 }
 
@@ -130,34 +131,19 @@ void Solution::calculateCosts() {
 
 void Solution::printSolution() const {
 
-    std::cout << "\nSolucao: \n\n";
-
-    std::cout << "(Origem, Destino, Carga, Custo, Custo Acumulado)"<<std::endl;
+    std::cout << getTotalCost() << std::endl;
+    std::cout << (*this->solution).size() << std::endl;
     // Itera sobre cada rota na matriz de solução
     for (size_t i = 0; i < this->solution->size(); ++i) {
         if ((*this->solution)[i].size() == 0){
             break;
         }
-        std::cout << "Rota " << i + 1 << ": ";
-
         // Itera sobre cada passo da rota (elemento dentro do vetor interno)
         for (size_t j = 0; j < (*this->solution)[i].size(); ++j) {
-            std::cout << "(" << (*this->solution)[i][j].stationOriginId 
-                        << ", " << (*this->solution)[i][j].stationId 
-                        << ", " << (*this->solution)[i][j].cargo 
-                        << ", " << (*this->solution)[i][j].cost 
-                        << ", " << (*this->solution)[i][j].accumulatedCost << ")";
-
-            // Adiciona o '->' apenas se não for o último passo
-            if (j < (*this->solution)[i].size() - 1) {
-                std::cout << " -> ";
-            }
-           
+            std::cout << (*this->solution)[i][j].stationId << " ";
         }
-        std::cout <<" Custo Total da Rota: " <<(*this->solution)[i][ (*this->solution)[i].size() - 1].accumulatedCost<< std::endl;
-        std::cout << std::endl; // Quebra de linha após cada rota
+        std::cout << std::endl; // Quebra de linha após cada rota  
     }
-    std::cout <<" Custo Total da Solução: " <<getTotalCost()<< std::endl;
 }
 
 void Solution::validateSolution() const {

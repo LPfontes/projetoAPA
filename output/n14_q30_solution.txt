@@ -1,14 +1,4 @@
-
------------------------   n14_q30 -------------------------------
- 
-Heuristica construtiva:
-Ótimo: 12600
-Valor solução: 14900
-Tempo de execucao: 0.070072 ms
-Gap: 18.254%
-
-VND:
-Ótimo: 12600
-Valor solução: 13700
-Tempo de execucao: 0.152879 ms
-Gap: 8.73016%
+13700
+2
+0 5 4 11 1 12 7 14 10 9 2 13 8 3 0 
+0 6 0 

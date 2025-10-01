@@ -12,7 +12,7 @@ make
 Para executar uma instância basta passar o caminho como argumento no terminal:
   
 
-./build/prog <caminho_do_arquivo>
+./build/prog <caminho_do_arquivo> <caminho_da_saida>
   
 
 Para executar todas as instancias e calcular o gap bas executar sem argumentos:

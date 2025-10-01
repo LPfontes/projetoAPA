@@ -1,14 +1,8 @@
-
------------------------   n17_q20 -------------------------------
- 
-Heuristica construtiva:
-Ótimo: 29259
-Valor solução: 69022
-Tempo de execucao: 0.089735 ms
-Gap: 135.9%
-
-VND:
-Ótimo: 29259
-Valor solução: 38823
-Tempo de execucao: 0.448789 ms
-Gap: 32.6874%
+38823
+6
+0 4 7 10 13 9 11 12 15 16 5 8 6 0 
+0 2 0 
+0 14 0 
+0 17 0 
+0 3 0 
+0 1 0 

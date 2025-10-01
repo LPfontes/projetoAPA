@@ -1,14 +1,9 @@
-
------------------------   n12_q30 -------------------------------
- 
-Heuristica construtiva:
-Ótimo: 14600
-Valor solução: 44100
-Tempo de execucao: 0.066941 ms
-Gap: 202.055%
-
-VND:
-Ótimo: 14600
-Valor solução: 28400
-Tempo de execucao: 0.189297 ms
-Gap: 94.5205%
+28400
+7
+0 11 1 9 5 7 8 0 
+0 6 0 
+0 4 0 
+0 2 0 
+0 12 0 
+0 10 0 
+0 3 0 
